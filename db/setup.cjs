@@ -42,9 +42,12 @@ async function main() {
   //    e.g. NOW() - INTERVAL '8 days' = 8 days ago at the moment of seeding.
   console.log("Seeding Ludhiana Burrito and three reviews...");
   const restaurants = await sql`
-    INSERT INTO restaurants (name, cuisine, area)
-    VALUES ('Ludhiana Burrito', 'Indian', 'Sector 32')
-    RETURNING id, name, cuisine, area
+    INSERT INTO restaurants (name, cuisine, area, image_url)
+    VALUES (
+      'Ludhiana Burrito', 'Indian', 'Sector 32',
+      'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=1200&auto=format&fit=crop'
+    )
+    RETURNING id, name, cuisine, area, image_url
   `;
   const id = restaurants[0].id;
 

@@ -33,7 +33,7 @@ export async function GET(
 
   // 1. The restaurant itself
   const restaurant = await sql`
-    SELECT id, name, cuisine, area
+    SELECT id, name, cuisine, area, image_url
     FROM restaurants
     WHERE id = ${restaurantId}
   `;
@@ -77,6 +77,7 @@ export async function GET(
     name: restaurant[0].name,
     cuisine: restaurant[0].cuisine,
     area: restaurant[0].area,
+    imageUrl: restaurant[0].image_url ?? null,
     averageRating,
     totalReviews,
     latestReview: reviews.length > 0 ? reviews[0] : null,

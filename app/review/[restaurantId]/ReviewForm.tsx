@@ -5,6 +5,7 @@
 // backend; the only checks here are kind ones (enable the button etc.).
 import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function ReviewForm({
   params,
@@ -14,6 +15,7 @@ export default function ReviewForm({
   const { restaurantId } = use(params);
   const router = useRouter();
   const [restaurantName, setRestaurantName] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState("");
@@ -28,7 +30,10 @@ export default function ReviewForm({
         if (!res.ok) throw new Error("not found");
         return res.json();
       })
-      .then((data) => setRestaurantName(data.name))
+      .then((data) => {
+        setRestaurantName(data.name);
+        setImageUrl(data.imageUrl);
+      })
       .catch(() => setLoadError("That restaurant does not exist."));
   }, [restaurantId]);
 
@@ -73,10 +78,25 @@ export default function ReviewForm({
 
   return (
     <main className="mx-auto w-full max-w-[560px] px-6 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight text-stone-900">
-        {restaurantName ?? "Loading…"}
-      </h1>
-      <p className="mt-2 text-stone-600">What did you think of it?</p>
+      <div className="flex items-center gap-3">
+        {imageUrl && (
+          <div className="relative h-12 w-12 overflow-hidden rounded-full bg-stone-200">
+            <Image
+              src={imageUrl}
+              alt=""
+              fill
+              sizes="48px"
+              className="object-cover"
+            />
+          </div>
+        )}
+        <div>
+          <h1 className="text-3xl font-semibold tracking-tight text-stone-900">
+            {restaurantName ?? "Loading…"}
+          </h1>
+          <p className="mt-2 text-stone-600">What did you think of it?</p>
+        </div>
+      </div>
 
       <form onSubmit={handleSubmit} className="mt-10">
         <fieldset>

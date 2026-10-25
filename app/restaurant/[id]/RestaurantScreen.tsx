@@ -4,11 +4,13 @@
 // everything it shows. It computes nothing.
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type RestaurantData = {
   name: string;
   cuisine: string;
   area: string;
+  imageUrl: string | null;
   averageRating: number | null;
   totalReviews: number;
   latestReview: {
@@ -82,6 +84,21 @@ export default function RestaurantScreen({
       <p className="mt-1 text-sm text-stone-600">
         {restaurant.cuisine} · {restaurant.area}
       </p>
+
+      {/* Photo, if this restaurant has one. It arrives as a URL from the
+          backend — the frontend never invents it and never computes it. */}
+      {restaurant.imageUrl && (
+        <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-lg bg-stone-200">
+          <Image
+            src={restaurant.imageUrl}
+            alt={restaurant.name}
+            fill
+            priority
+            sizes="(max-width: 560px) 100vw, 512px"
+            className="object-cover"
+          />
+        </div>
+      )}
 
       {/* 2. The average rating, large — the transmission starts here.
 

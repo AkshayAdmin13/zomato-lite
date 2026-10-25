@@ -3,6 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  images: {
+    // Trust exactly one image host, nothing broader.
+    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
+  },
   // The front door: requests to / are answered with a redirect before any
   // HTML is rendered, because / itself has no product page.
   async redirects() {
