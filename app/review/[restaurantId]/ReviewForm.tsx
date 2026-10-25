@@ -64,15 +64,19 @@ export default function ReviewForm({
   const canSubmit = rating !== null && comment.trim().length > 0;
 
   if (loadError) {
-    return <p className="text-stone-500">{loadError}</p>;
+    return (
+      <main className="mx-auto w-full max-w-[560px] px-6 py-16">
+        <p className="text-stone-500">{loadError}</p>
+      </main>
+    );
   }
 
   return (
     <main className="mx-auto w-full max-w-[560px] px-6 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">
+      <h1 className="text-3xl font-semibold tracking-tight text-stone-900">
         {restaurantName ?? "Loading…"}
       </h1>
-      <p className="mt-2 text-stone-500">What did you think of it?</p>
+      <p className="mt-2 text-stone-600">What did you think of it?</p>
 
       <form onSubmit={handleSubmit} className="mt-10">
         <fieldset>

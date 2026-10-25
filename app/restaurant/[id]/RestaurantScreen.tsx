@@ -79,7 +79,7 @@ export default function RestaurantScreen({
       <h1 className="text-3xl font-semibold tracking-tight">
         {restaurant.name}
       </h1>
-      <p className="mt-1 text-sm text-stone-500">
+      <p className="mt-1 text-sm text-stone-600">
         {restaurant.cuisine} · {restaurant.area}
       </p>
 
@@ -92,7 +92,7 @@ export default function RestaurantScreen({
         <span className="text-6xl font-semibold tracking-tight text-amber-600">
           {hasReviews ? restaurant.averageRating : "—"}
         </span>
-        <span className="text-sm text-stone-500">
+        <span className="text-sm text-stone-600">
           {hasReviews ? `${restaurant.totalReviews} reviews` : "No reviews yet"}
         </span>
       </div>
@@ -100,11 +100,11 @@ export default function RestaurantScreen({
       {/* 3. Latest review, set apart from the rest */}
       {restaurant.latestReview && (
         <article className="mt-10 rounded-lg border border-stone-200 border-l-4 border-l-amber-600 bg-white p-5">
-          <p className="text-xs font-medium tracking-wide text-stone-400 uppercase">
+          <p className="text-xs font-medium tracking-wide text-stone-500 uppercase">
             Latest review
           </p>
           <p className="mt-3 text-lg">{restaurant.latestReview.comment}</p>
-          <p className="mt-3 text-sm text-stone-500">
+          <p className="mt-3 text-sm text-stone-600">
             {"★".repeat(restaurant.latestReview.rating)}
             <span className="text-stone-300">
               {"★".repeat(5 - restaurant.latestReview.rating)}
@@ -121,7 +121,7 @@ export default function RestaurantScreen({
           {restaurant.reviews.map((review) => (
             <li key={review.id} className="py-5">
               <p className="text-stone-800">{review.comment}</p>
-              <p className="mt-2 text-sm text-stone-500">
+              <p className="mt-2 text-sm text-stone-600">
                 {"★".repeat(review.rating)}
                 <span className="text-stone-300">
                   {"★".repeat(5 - review.rating)}
